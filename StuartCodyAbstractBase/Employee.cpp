@@ -7,6 +7,12 @@ Employee::Employee(): _salary(0)
 
 }
 
+Employee::Employee(const char* name, int salary)
+{
+	SetName(name);
+	SetSalary(salary);
+}
+
 Employee::~Employee()
 {
 

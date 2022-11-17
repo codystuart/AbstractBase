@@ -8,7 +8,7 @@
 #include "Student.h"
 
 int ValidateInt(int number);
-std::vector<Base*>& AddRecord(std::vector<Base*>& v, Employee* e, Student* s);
+std::vector<Base*>& AddRecord(std::vector<Base*>& v);// , Employee* e, Student* s);
 void DisplayRecords(std::vector<Base*>& v);
 
 int main()
@@ -20,9 +20,6 @@ int main()
 
 	//declare a vector or type Base pointers to store our upcasted employees and students
 	std::vector<Base*> v;
-	//create employee and student objects here so that switch/case doesnt complain about skipping initialization
-	Employee* emp = new Employee();
-	Student* stud = new Student();
 
 	//create a bool so our while loop has a condition to check to run again
 	bool runAgain = true;
@@ -44,7 +41,7 @@ int main()
 		switch (menuChoice)
 		{
 		case 1:
-			AddRecord(v,emp,stud);
+			AddRecord(v);//,emp,stud);
 			break;
 		case 2:
 			DisplayRecords(v);
@@ -57,6 +54,7 @@ int main()
 		case 4:
 			std::cout << "Exiting..." << std::endl;
 			runAgain = false;
+
 			break;
 		}
 	}
@@ -66,15 +64,11 @@ int main()
 		delete v[i];
 	}
 
-	delete emp;
-	delete stud;
-
 }
 
-std::vector<Base*>& AddRecord(std::vector<Base*>& v, Employee* e, Student* s)
+std::vector<Base*>& AddRecord(std::vector<Base*>& v)
 {
 	system("cls");
-
 	//initialize variables needed for case statement
 	char name[32];
 	int salary = 0;
@@ -86,44 +80,42 @@ std::vector<Base*>& AddRecord(std::vector<Base*>& v, Employee* e, Student* s)
 	switch (recordType)
 	{
 	case 1:
-		std::cout << "Please enter the employees name" << std::endl;
+		std::cout << "\nPlease enter the employees name" << std::endl;
 		std::cin.clear();
 		std::cin.ignore(INT_MAX, '\n');
 		std::cin.getline(name, 32);
-		e->SetName(name);
-		std::cout << "Please enter " << e->GetName() << "'s salary" << std::endl;
+		std::cout << "\nPlease enter " << name << "'s salary" << std::endl;
 		salary = ValidateInt(salary);
 		if (salary < 0)
 		{
 			std::cout << "Salary can't be negative" << std::endl;
 			salary = ValidateInt(salary);
 		}
-		e->SetSalary(salary);
-		v.push_back(e);
-		std::cout << "Added record for " << name << " with a salary of " << salary << std::endl;
+		v.push_back(new Employee(name, salary));
+		std::cout << "\nAdded record for " << name << " with a salary of " << salary << std::endl;
 		break;
 
 	case 2:
-		std::cout << "Please enter the students name" << std::endl;
+		std::cout << "\nPlease enter the students name" << std::endl;
 		std::cin.clear();
 		std::cin.ignore(INT_MAX, '\n');
 		std::cin.getline(name, 32);
-		s->SetName(name);
-		std::cout << "Please enter" << s->GetName() << "'s GPA" << std::endl;
+		std::cout << "\nPlease enter" << name << "'s GPA" << std::endl;
 		std::cin >> gpa;
-		s->SetGpa(gpa);
-		v.push_back(s);
-		std::cout << "Added record for " << name << " with a gpa of " << gpa << std::endl;
+		v.push_back(new Student(name, gpa));
+		std::cout << "\nAdded record for " << name << " with a gpa of " << gpa << std::endl;
 		break;
 	}
-
 	system("pause");
 	return v;
 }
 
 void DisplayRecords(std::vector<Base*>& v)
 {
+	system("cls");
 	std::cout << "Now Dispalying " << v.size() << " records" << std::endl;
+	std::cout << "------------------------" << std::endl;
+
 
 	for (int i = 0; i < v.size(); i++)
 	{
@@ -144,6 +136,7 @@ int ValidateInt(int number)
 		}
 		std::cin.clear();
 		std::cin.ignore(INT_MAX, '\n');
+		std::cout << "Selection Invalid" << std::endl;
 	}
 	return number;
 }

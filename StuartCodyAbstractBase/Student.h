@@ -10,6 +10,7 @@ private:
 
 public:
 	Student(); //default constructor
+	Student(const char* name, float gpa);
 	virtual ~Student(); //destructor
 
 	void SetGpa(float gpa);

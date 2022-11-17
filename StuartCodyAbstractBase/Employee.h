@@ -9,6 +9,8 @@ private:
 
 public:
 	Employee();//default constructor
+	Employee(const char* name, int salary);
+
 	virtual ~Employee(); //destructor
 
 	void SetSalary(int salary);

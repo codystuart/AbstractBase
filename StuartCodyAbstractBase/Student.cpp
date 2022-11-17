@@ -6,6 +6,12 @@ Student::Student() : _gpa(0)
 
 }
 
+Student::Student(const char* name, float gpa)
+{
+	SetName(name);
+	SetGpa(gpa);
+}
+
 Student::~Student()
 {
 
