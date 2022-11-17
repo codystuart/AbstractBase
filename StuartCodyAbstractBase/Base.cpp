@@ -42,7 +42,7 @@ void Base::SetName(const char* name)
 		delete[] _name;
 	}
 	// get the size of new char array
-	int len = strlen(name) + 1;
+	int len = strlen(name) + 1; 
 	//create new char array
 	_name = new char[len];
 	//copy char from passed in name to member field _name
