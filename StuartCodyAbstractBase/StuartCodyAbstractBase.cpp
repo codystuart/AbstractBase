@@ -66,6 +66,8 @@ int main()
 		delete v[i];
 	}
 
+	delete emp;
+	delete stud;
 
 }
 
