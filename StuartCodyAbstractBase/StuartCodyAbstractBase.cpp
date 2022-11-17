@@ -148,15 +148,13 @@ void DuplicateRecord(std::vector<Base*>& v)
 		Employee* empCopy = new Employee(*empTest);
 		v.push_back(empCopy);
 	}
-	else
+	Student* studTest = dynamic_cast<Student*>(v[recordNum]);
+	if (studTest != nullptr)
 	{
-		Student* studTest = dynamic_cast<Student*>(v[recordNum]);
-		if (studTest != nullptr)
-		{
-			Student* studCopy = new Student(*studTest);
-			v.push_back(studCopy);
-		}
+		Student* studCopy = new Student(*studTest);
+		v.push_back(studCopy);
 	}
+	
 
 	std::cout << "Record added!" << std::endl;
 }
