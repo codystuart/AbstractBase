@@ -51,7 +51,7 @@ int main()
 			system("pause");
 			break;
 		case 3:
-			std::cout << "Duplicating record..." << std::endl;
+			DuplicateRecord(v);
 			system("pause");
 			break;
 		case 4:
@@ -103,7 +103,7 @@ std::vector<Base*>& AddRecord(std::vector<Base*>& v)
 		std::cin.clear();
 		std::cin.ignore(INT_MAX, '\n');
 		std::cin.getline(name, 32);
-		std::cout << "\nPlease enter" << name << "'s GPA" << std::endl;
+		std::cout << "\nPlease enter " << name << "'s GPA" << std::endl;
 		gpa = ValidateFloat(gpa);
 		v.push_back(new Student(name, gpa));
 		std::cout << "\nAdded record for " << name << " with a gpa of " << gpa << std::endl;
@@ -116,7 +116,7 @@ std::vector<Base*>& AddRecord(std::vector<Base*>& v)
 void DisplayRecords(std::vector<Base*>& v)
 {
 	system("cls");
-	std::cout << "Now Dispalying " << v.size() << " records" << std::endl;
+	std::cout << "Now Dispalying " << v.size() << " record(s)" << std::endl;
 	std::cout << "------------------------" << std::endl;
 
 
@@ -140,6 +140,20 @@ void DuplicateRecord(std::vector<Base*>& v)
 		std::cout << std::endl;
 	}
 	std::cout << "Select record# ";
+	int recordNum = 0;
+	recordNum = ValidateInt(recordNum);
+	if (dynamic_cast<Employee*>(v[recordNum]))
+	{
+		dynamic_cast<Employee*>(v[recordNum]);
+		v.push_back(v[recordNum]);
+	}
+	else
+	{
+		dynamic_cast<Student*>(v[recordNum]);
+		v.push_back(v[recordNum]);
+	}
+
+	std::cout << "Record added!" << std::endl;
 }
 
 int ValidateInt(int number)
