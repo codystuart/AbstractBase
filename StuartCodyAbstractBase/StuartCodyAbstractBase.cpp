@@ -8,8 +8,11 @@
 #include "Student.h"
 
 int ValidateInt(int number);
-std::vector<Base*>& AddRecord(std::vector<Base*>& v);// , Employee* e, Student* s);
+float ValidateFloat(float number);
+std::vector<Base*>& AddRecord(std::vector<Base*>& v);
 void DisplayRecords(std::vector<Base*>& v);
+void DuplicateRecord(std::vector<Base*>& v);
+
 
 int main()
 {
@@ -101,7 +104,7 @@ std::vector<Base*>& AddRecord(std::vector<Base*>& v)
 		std::cin.ignore(INT_MAX, '\n');
 		std::cin.getline(name, 32);
 		std::cout << "\nPlease enter" << name << "'s GPA" << std::endl;
-		std::cin >> gpa;
+		gpa = ValidateFloat(gpa);
 		v.push_back(new Student(name, gpa));
 		std::cout << "\nAdded record for " << name << " with a gpa of " << gpa << std::endl;
 		break;
@@ -126,6 +129,19 @@ void DisplayRecords(std::vector<Base*>& v)
 	}
 }
 
+void DuplicateRecord(std::vector<Base*>& v)
+{
+	std::cout << "Which record would you like to duplicate?" << std::endl;
+	for (int i = 0; i < v.size(); i++)
+	{
+
+		std::cout << "Record #" << i << std::endl;
+		v[i]->DisplayRecord();
+		std::cout << std::endl;
+	}
+	std::cout << "Select record# ";
+}
+
 int ValidateInt(int number)
 {
 	while (true)
@@ -141,3 +157,18 @@ int ValidateInt(int number)
 	return number;
 }
 
+
+float ValidateFloat(float number)
+{
+	while (true)
+	{
+		if (std::cin >> number)
+		{
+			break;
+		}
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
+		std::cout << "Selection Invalid" << std::endl;
+	}
+	return number;
+}
